@@ -11,8 +11,6 @@ The **Tasks API** is a lightweight and efficient RESTful service designed for ma
 **Description:**  
 Retrieves a list of all tasks.
 
----
-
 ### 2. New Task
 **Endpoint:**  
 `POST http://localhost:4001/api/tasks/`  

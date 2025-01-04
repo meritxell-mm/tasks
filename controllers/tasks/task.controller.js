@@ -2,6 +2,12 @@ import TaskService from '../../services/task.service.js';
 import Task from '../../models/task.model.js';
 
 class TaskController {
+
+  /** 
+   * Creates a new task.
+   * @body {String} name - Task name
+   * @returns {Task} - The created task with status 201.
+   */
   static async newTask(req, res) {
     const { name } = req.body;
     try {
@@ -12,6 +18,10 @@ class TaskController {
     }
   }  
 
+  /** 
+   * Fetches all tasks.
+   * @returns {Array<Task>} - List of tasks with status 200.
+   */
   static async getTasks(req, res) {
     try {
       const tasks = await TaskService.fetchTasks();
@@ -21,6 +31,11 @@ class TaskController {
     }
   }
 
+  /** 
+   * Deletes a task by its ID.
+   * @param {int} taskID - The ID of the task to delete.
+   * @returns {JSON} - Message confirming task deletion with status 200.
+   */
   static async deleteTask(req, res) {
     const { taskID } = req.params;
     try {
@@ -31,6 +46,13 @@ class TaskController {
     }
   }
 
+  /** 
+   * Updates an existing task by its ID.
+   * @param {int} taskID - The ID of the task to update.
+   * @body {String} name - The new name for the task.
+   * @body {Boolean} completed - Whether the task is completed or not.
+   * @returns {Task} - The updated task with status 200 or error message.
+   */
   static async updateTask(req, res) {
     const { taskID } = req.params;
     const { name, completed } = req.body;

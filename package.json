@@ -3,15 +3,21 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "dotenv -e .env node api.js",
+    "start-dev": "dotenv -e .env.dev nodemon api.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "mariadb": "^3.4.0"
   },
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "dotenv-cli": "^8.0.0"
+  }
 }

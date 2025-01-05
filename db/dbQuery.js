@@ -1,4 +1,4 @@
-import pool from "../db/pool.js";
+import pool from "./pool.js";
 
 const dbQuery = async (query, params = []) => {
     const connection = await pool.getConnection();

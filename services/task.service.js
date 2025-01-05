@@ -1,6 +1,15 @@
 import TaskRepository from '../repositories/task.repo.js';
 
 class TaskService {
+
+  static async getById(taskID) {
+    try { 
+      return await TaskRepository.getById(taskID);
+    } catch (err) {
+      throw new Error('Error adding task');
+    }
+  }
+
   static async newTask(name) {
     try { 
       const result = await TaskRepository.insert(name);

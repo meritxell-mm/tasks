@@ -49,8 +49,8 @@ class TaskController {
   /** 
    * Updates an existing task by its ID.
    * @param {int} taskID - The ID of the task to update.
-   * @body {String} name - The new name for the task.
-   * @body {Boolean} completed - Whether the task is completed or not.
+   * @body {String} name - The new name for the task. Optional
+   * @body {Boolean} completed - Whether the task is completed or not. Optional
    * @returns {Task} - The updated task with status 200 or error message.
    */
   static async updateTask(req, res) {
@@ -58,11 +58,20 @@ class TaskController {
     const { name, completed } = req.body;
     
     try {
-      const task = new Task(taskID, name, completed)
-      const updatedTask = await TaskService.updateTask(task);
-      if(!updatedTask){
-        res.status(404).json({ message: 'Task not found' });
+      const existingTask = await TaskService.getById(taskID);
+      if (!existingTask) {
+        return res.status(404).json({ message: 'Task not found' });
       }
+
+      if (name !== undefined) {
+        existingTask.name = name; // Update name filed if provided
+      }
+
+      if (completed !== undefined ) {
+        existingTask.completed = completed; // Update completed field if provided
+      }
+      
+      const updatedTask = await TaskService.updateTask(existingTask);
       res.status(200).json(updatedTask);
     } catch (err) {
       res.status(500).json({ error: err.message });

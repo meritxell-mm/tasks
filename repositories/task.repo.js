@@ -1,4 +1,4 @@
-import dbQuery from '../helpers/dbQuery.js';
+import dbQuery from '../db/dbQuery.js';
 
 class TaskRepository {
 
